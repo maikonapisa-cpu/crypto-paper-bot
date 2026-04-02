@@ -1,0 +1,11 @@
+{
+  "name": "@crypto-paper-bot/analytics",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "@crypto-paper-bot/shared-types": "workspace:*",
+    "uuid": "^9.0.0"
+  }
+}

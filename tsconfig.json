@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@crypto-paper-bot/shared-types": ["./packages/shared-types/src/index.ts"],
+      "@crypto-paper-bot/market-data": ["./packages/market-data/src/index.ts"],
+      "@crypto-paper-bot/strategy-engine": ["./packages/strategy-engine/src/index.ts"],
+      "@crypto-paper-bot/paper-execution": ["./packages/paper-execution/src/index.ts"],
+      "@crypto-paper-bot/risk-engine": ["./packages/risk-engine/src/index.ts"],
+      "@crypto-paper-bot/analytics": ["./packages/analytics/src/index.ts"],
+      "@crypto-paper-bot/ui-components": ["./packages/ui-components/src/index.ts"]
+    }
+  },
+  "include": [
+    "packages/*/src/**/*.ts",
+    "apps/*/src/**/*.ts",
+    "tests/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/dist/**",
+    "**/*.test.ts"
+  ]
+}

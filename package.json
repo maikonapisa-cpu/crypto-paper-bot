@@ -1,0 +1,25 @@
+{
+  "name": "crypto-paper-bot",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Simulator-first crypto paper trading platform. Paper mode only. No real funds.",
+  "packageManager": "pnpm@9.0.0",
+  "engines": { "node": ">=20.0.0", "pnpm": ">=9.0.0" },
+  "scripts": {
+    "dev":           "pnpm --parallel --filter \"./apps/*\" dev",
+    "dev:api":       "pnpm --filter @crypto-paper-bot/api dev",
+    "dev:web":       "pnpm --filter @crypto-paper-bot/web dev",
+    "build":         "pnpm --recursive build",
+    "test":          "vitest run",
+    "test:unit":     "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "db:migrate":    "node database/migrate.js",
+    "typecheck":     "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node":   "^20.0.0",
+    "typescript":    "^5.4.0",
+    "vitest":        "^1.6.0",
+    "tsx":           "^4.11.0"
+  }
+}
