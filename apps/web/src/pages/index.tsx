@@ -12,6 +12,38 @@ function Tooltip({ label }: { label: string }) {
   );
 }
 
+function PixelSprite({ variant }: { variant: 'chris' | 'atlas' }) {
+  const colors =
+    variant === 'chris'
+      ? ['#7c3aed', '#c084fc', '#ede9fe', '#1e1b4b']
+      : ['#16a34a', '#86efac', '#dcfce7', '#052e16'];
+
+  const cells = [
+    [0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 1, 2, 2, 1, 0, 0],
+    [0, 1, 2, 3, 3, 2, 1, 0],
+    [1, 2, 3, 3, 3, 3, 2, 1],
+    [1, 2, 3, 3, 3, 3, 2, 1],
+    [0, 1, 2, 3, 3, 2, 1, 0],
+    [0, 2, 2, 1, 1, 2, 2, 0],
+    [0, 2, 0, 2, 2, 0, 2, 0],
+  ];
+
+  return (
+    <div className="grid grid-cols-8 gap-[1px] w-12 h-12 mx-auto pixel-sprite">
+      {cells.flatMap((row, y) =>
+        row.map((cell, x) => (
+          <div
+            key={`${y}-${x}`}
+            className="w-full h-full"
+            style={{ backgroundColor: cell === 0 ? 'transparent' : colors[cell - 1] }}
+          />
+        )),
+      )}
+    </div>
+  );
+}
+
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('Office');
 
@@ -59,8 +91,8 @@ export default function Dashboard() {
                   'linear-gradient(#2c3e50 0 16%, #1f2a37 16% 72%, #16202c 72% 100%)',
               }}
             >
-              {/* pixel stars */}
-              <div className="absolute inset-0 opacity-20"
+              <div
+                className="absolute inset-0 opacity-20"
                 style={{
                   backgroundImage:
                     'radial-gradient(circle at 12px 18px, rgba(255,255,255,0.8) 0 1px, transparent 2px), radial-gradient(circle at 120px 80px, rgba(255,255,255,0.7) 0 1px, transparent 2px), radial-gradient(circle at 220px 40px, rgba(255,255,255,0.7) 0 1px, transparent 2px)',
@@ -68,14 +100,11 @@ export default function Dashboard() {
                 }}
               />
 
-              {/* ceiling / wall strip */}
               <div className="absolute inset-x-0 top-0 h-16 bg-[#33475e] border-b border-white/10" />
 
-              {/* wall panels */}
               <div className="absolute left-8 top-24 w-44 h-36 rounded-sm bg-[#3b4d66] border-4 border-[#243447] shadow-lg" />
               <div className="absolute right-8 top-24 w-44 h-36 rounded-sm bg-[#3b4d66] border-4 border-[#243447] shadow-lg" />
 
-              {/* carpet/grid floor */}
               <div
                 className="absolute inset-x-0 bottom-0 h-[32%] opacity-30"
                 style={{
@@ -85,21 +114,17 @@ export default function Dashboard() {
                 }}
               />
 
-              {/* Chris - top left boss */}
               <div
                 title="Chris — Boss"
                 className="absolute left-6 top-6 w-28 text-center select-none"
               >
-                <div className="mx-auto w-12 h-12 rounded-sm border-4 border-[#c084fc] bg-[#7c3aed] shadow-lg flex items-center justify-center text-xl">
-                  👑
+                <div className="relative mx-auto w-12 h-12">
+                  <PixelSprite variant="chris" />
                 </div>
-                <div className="mt-2 text-xs font-bold text-violet-200">
-                  Chris
-                </div>
+                <div className="mt-2 text-xs font-bold text-violet-200">Chris</div>
                 <div className="text-[10px] text-zinc-400">Boss • stationary</div>
               </div>
 
-              {/* cubicle desk */}
               <div className="absolute left-[41%] top-[39%] w-56 h-32 rounded-sm bg-[#4b5563] border-4 border-[#273140] shadow-xl" />
               <div className="absolute left-[43%] top-[33%] w-32 h-12 rounded-sm bg-[#8b5a2b] border-4 border-[#5b3b1f] shadow-lg" />
               <div className="absolute left-[46%] top-[45%] w-20 h-4 bg-[#1f2937] border border-white/10" />
@@ -107,26 +132,23 @@ export default function Dashboard() {
               <div className="absolute left-[52%] top-[50%] w-10 h-10 rounded-sm bg-[#374151] border-4 border-[#111827]" />
               <div className="absolute left-[48%] top-[41%] w-4 h-12 bg-[#c084fc] border-2 border-[#6d28d9]" />
 
-              {/* Atlas - cubicle worker */}
               <div
                 title="Atlas — Paper Trading Agent"
                 className="absolute left-[46%] top-[44%] w-20 text-center select-none atlas-walk"
               >
-                <div className="relative mx-auto w-12 h-12 rounded-sm border-4 border-[#86efac] bg-[#16a34a] shadow-lg flex items-center justify-center text-xl atlas-bob pixel-outline">
-                  🤖
+                <div className="relative mx-auto w-12 h-12 atlas-bob pixel-outline">
+                  <PixelSprite variant="atlas" />
                   <Tooltip label="Atlas" />
                 </div>
                 <div className="mt-2 text-xs font-bold text-green-200">Atlas</div>
                 <div className="text-[10px] text-zinc-400">Cubicle A1</div>
               </div>
 
-              {/* speech bubble */}
               <div className="absolute left-[49%] top-[32%] -translate-x-1/2 rounded-md border-4 border-white/10 bg-[#f8fafc] px-3 py-2 text-[11px] text-[#0f172a] shadow-lg">
                 paper loop active
                 <div className="absolute left-1/2 top-full -translate-x-1/2 border-8 border-transparent border-t-white/10" />
               </div>
 
-              {/* HUD */}
               <div className="absolute right-6 top-6 w-64 rounded-xl border-4 border-[#38bdf8]/30 bg-[#020617]/80 p-4 shadow-2xl backdrop-blur-sm pixel-panel">
                 <div className="text-xs uppercase tracking-[0.2em] text-cyan-300 mb-2">Atlas HUD</div>
                 <div className="space-y-2 text-sm text-zinc-200">
@@ -156,12 +178,6 @@ export default function Dashboard() {
                   100% { transform: translateY(0px); }
                 }
 
-                @keyframes bubblePulse {
-                  0% { opacity: 0.85; transform: translateX(-50%) translateY(0px); }
-                  50% { opacity: 1; transform: translateX(-50%) translateY(-2px); }
-                  100% { opacity: 0.85; transform: translateX(-50%) translateY(0px); }
-                }
-
                 .atlas-walk {
                   animation: atlasWalk 4s ease-in-out infinite;
                 }
@@ -172,6 +188,11 @@ export default function Dashboard() {
 
                 .pixel-outline {
                   box-shadow: 0 0 0 1px rgba(255,255,255,0.12), inset 0 0 0 1px rgba(0,0,0,0.2);
+                }
+
+                .pixel-sprite {
+                  image-rendering: pixelated;
+                  filter: drop-shadow(0 2px 0 rgba(0,0,0,0.35));
                 }
 
                 .pixel-panel {
